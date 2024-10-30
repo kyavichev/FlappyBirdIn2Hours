@@ -25,6 +25,8 @@ public class GameManager : MonoBehaviour
     // List of pipe pairs
     public List<PipePairController> pipePairs;
 
+    private bool isGameActive = false;
+
 
     // Start is called before the first frame update
     void Start()
@@ -55,16 +57,26 @@ public class GameManager : MonoBehaviour
 
             if(distanceText)
             {
-                distanceText.text = "Distance: 000";
+                distanceText.text = "Distance: 0";
             }
         }
         else
         {
             if(distanceText != null)
             {
-                float distance = hero.transform.localPosition.x - heroSpawnPosition.x;
+                int distance = Mathf.RoundToInt((hero.transform.localPosition.x - heroSpawnPosition.x) * 10f);
                 distanceText.text = "Distance: " + distance;
             }
         }
+    }
+
+
+    public void OnStartButtonPressed()
+    {
+        Rigidbody2D heroBody = hero.GetComponent<Rigidbody2D>();
+        heroBody.isKinematic = false;
+
+        HeroMover heroMover = hero.GetComponent<HeroMover>();
+        heroMover.StartMoving();
     }
 }

@@ -19,12 +19,22 @@ public class HeroMover : MonoBehaviour
     // Direction in which hero automatically moves, by default to the right
     public Vector2 dir = new Vector2(1, 0);
 
+    public bool isAutoStart = true;
+
 
     // Start is called before the first frame update
     private void Start()
     {
+        if (isAutoStart)
+        {
+            // Set initial velocity on the hero's rigidbody
+            body.velocity = dir * speed;
+        }
+    }
+
+    public void StartMoving()
+    {
         // Set initial velocity on the hero's rigidbody
         body.velocity = dir * speed;
     }
-
 }
